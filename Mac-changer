@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+
+import subprocess
+
+interface = input("interface >") 
+new_mac = input("new Mac >") 
+
+## Use input with Python3
+## Use raw_input with Python2 
+
+print("Initializing MAC Address change to" + interface + " to " + new_mac)
+
+subprocess.call("ifconfig" + interface + "down", shell=True)
+subprocess.call("ifconfig" + interface + "ether" + new_mac, shell=True)
+subprocess.call("ifconfig" + interface + "up", shell=True)
