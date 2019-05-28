@@ -10,6 +10,6 @@ new_mac = input("new Mac >")
 
 print("Initializing MAC Address change to" + interface + " to " + new_mac)
 
-subprocess.call("ifconfig" + interface + "down", shell=True)
-subprocess.call("ifconfig" + interface + "ether" + new_mac, shell=True)
-subprocess.call("ifconfig" + interface + "up", shell=True)
+subprocess.call(["ifconfig", interface, "down"])
+subprocess.call(["ifconfig", interface, "ether" + new_mac])
+subprocess.call(["ifconfig", interface, "up"])
