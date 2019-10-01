@@ -3,6 +3,13 @@
 import subprocess
 import optparse
 
+def change_mac(interface, new_mac):
+  print("Initializing MAC Address change to" + interface + " to " + new_mac)
+  
+  subprocess.call(["ifconfig", interface, "down"])
+  subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
+  subprocess.call(["ifconfig", interface, "up"])
+  
 ## optparse is a Python library for parsing command-line options. 
 parser = optparse.OptionParser()
 
@@ -11,14 +18,4 @@ parser.add_option("-m", "--mac", dest="new_mac", help="New MAC address.")
 
 (options,arguments) = parser.parse_args()
 
-interface = options.interface
-new_mac = options.new_mac
-
-## Use input with Python3
-## Use raw_input with Python2 
-
-print("Initializing MAC Address change to" + interface + " to " + new_mac)
-
-subprocess.call(["ifconfig", interface, "down"])
-subprocess.call(["ifconfig", interface, "ether" + new_mac])
-subprocess.call(["ifconfig", interface, "up"])
+change_mac(options.interface, options.new_mac)
